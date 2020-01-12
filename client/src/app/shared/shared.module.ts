@@ -4,6 +4,9 @@ import { MatFormFieldModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuardService } from './guards/AuthGuardService';
 import { RerouteGuardService } from './guards/RerouteGuardService';
+import {ApiService} from './api/services/api.service';
+import {BookService} from './api/services/book.service';
+import {UserService} from './api/services/user.service';
 
 const materialModule = [
   MatCardModule,
@@ -25,7 +28,10 @@ const materialModule = [
   ],
   providers: [
     AuthGuardService,
-    RerouteGuardService
+    RerouteGuardService,
+    ApiService,
+    BookService,
+    UserService
   ]
 })
 export class SharedModule { }

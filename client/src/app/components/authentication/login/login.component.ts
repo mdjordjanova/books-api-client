@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ApiService } from '../../../shared/api/services/api.service';
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   styleUrls: ['./login.component.scss'],
   template: `
       <mat-card class="login-card">
-          <img mat-card-image src="../../../assets/images/cover1.png" alt="">
+          <h1>Sign In</h1>
           <mat-card-content class="login-card__content">
               <form class="login-form" [formGroup]="form">
                   <div>
@@ -25,15 +28,42 @@ import { FormControl, FormGroup } from '@angular/forms';
               </form>
 
               <mat-card-actions>
-                  <button mat-raised-button color="primary" class="login-button">Login</button>
+                  <button mat-raised-button color="primary" class="login-button" (click)="login()">Login</button>
               </mat-card-actions>
           </mat-card-content>
       </mat-card>
   `
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  invalidLogin = false;
   form = new FormGroup({
     username: new FormControl('', []),
     password: new FormControl('', [])
   });
+
+  constructor(
+    private router: Router,
+    private apiService: ApiService) {}
+
+  ngOnInit() {
+    window.localStorage.removeItem('token');
+  }
+
+  login() {
+    const loginPayload = {
+      username: this.form.controls.username.value,
+      password: this.form.controls.password.value
+    };
+
+    this.apiService.login(loginPayload).pipe(
+      map(data => {
+        if (data.status === 200) {
+          window.localStorage.setItem('token', data.result.token);
+          this.router.navigate(['books']);
+        } else {
+          this.invalidLogin = true;
+        }
+      })
+    );
+  }
 }

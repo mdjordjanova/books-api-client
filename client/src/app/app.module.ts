@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { AuthGuardService } from './shared/guards/AuthGuardService';
 import { BookModule } from './components/book/book.module';
 import { RerouteGuardService } from './shared/guards/RerouteGuardService';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RerouteGuardService } from './shared/guards/RerouteGuardService';
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     SharedModule,
-    BookModule
+    BookModule,
+    HttpClientModule
   ],
   providers: [
     AuthGuardService,
