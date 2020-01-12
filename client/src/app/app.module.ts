@@ -3,6 +3,11 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
+import { AuthGuardService } from './shared/guards/AuthGuardService';
+import { BookModule } from './components/book/book.module';
+import { RerouteGuardService } from './shared/guards/RerouteGuardService';
 
 @NgModule({
   declarations: [
@@ -10,9 +15,15 @@ import { appRoutes } from './app.routing';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    SharedModule,
+    BookModule
   ],
-  providers: [],
+  providers: [
+    AuthGuardService,
+    RerouteGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

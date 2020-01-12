@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { bookRoutes } from './book.routing';
-import { BookListComponent } from './book-list/book-list.component';
+import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../../shared/shared.module';
+import { authRoutes } from './authentication.routing';
+
 
 @NgModule({
   declarations: [
-    BookListComponent
+    LoginComponent
   ],
   exports: [],
   imports: [
-    RouterModule.forChild(bookRoutes),
+    RouterModule.forChild(authRoutes),
     SharedModule
   ],
   providers: []
 })
-export class BookModule {
-}
+export class AuthenticationModule { }

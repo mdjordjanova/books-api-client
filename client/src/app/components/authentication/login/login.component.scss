@@ -1,0 +1,33 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form > * {
+  width: 100%;
+}
+
+.login-card {
+  width: 40%;
+  margin: 3rem;
+}
+
+.login-card__content {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 1rem !important;
+}
+
+.login-button {
+  width: 6rem;
+}
+
+label {
+  margin-right: 2rem;
+  color: rgb(0, 0, 0, 0.45);
+}
+
+mat-form-field {
+  width: 75%;
+  color: rgb(0, 0, 0, 0.65);
+}

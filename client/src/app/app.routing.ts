@@ -1,18 +1,23 @@
 import { Routes } from '@angular/router';
+import { AuthGuardService } from './shared/guards/AuthGuardService';
+import { RerouteGuardService } from './shared/guards/RerouteGuardService';
+import { AppComponent } from './app.component';
 
 
 export const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'books',
-    pathMatch: 'full'
+    component: AppComponent,
+    canActivate: [RerouteGuardService]
   },
   {
     path: 'books',
-    loadChildren: () => import('./components/book/book.module').then(m => m.BookModule)
+    loadChildren: () => import('./components/book/book.module').then(m => m.BookModule),
+    canActivate: [AuthGuardService],
+    canLoad: [AuthGuardService]
   },
   {
-    path: 'authors',
-    loadChildren: () => import('./components/author/author.module').then(m => m.AuthorModule)
+    path: 'login',
+    loadChildren: () => import('./components/authentication/authentication.module').then(m => m.AuthenticationModule)
   }
 ];
